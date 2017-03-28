@@ -1,0 +1,5 @@
+rootProject.name = "android-gradle-java-mutli-module-template"
+
+include ":android-app"
+include ":android-library"
+include ":java-library"

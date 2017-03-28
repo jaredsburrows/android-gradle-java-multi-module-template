@@ -1,0 +1,39 @@
+buildscript {
+    rootProject.ext.ci = rootProject.hasProperty("ci")
+
+    apply from: rootProject.file("gradle/versions.gradle")
+
+    repositories {
+        maven { url "https://plugins.gradle.org/m2/" }
+    }
+
+    dependencies {
+        classpath plugs.gradle
+        classpath plugs.gradleAndroidCommandPlugin
+        classpath plugs.playPublisher
+        classpath plugs.buildScanPlugin
+        classpath plugs.dexcountGradlePlugin
+        classpath plugs.gradleAndroidApkSizePlugin
+        classpath plugs.coverallsGradlePlugin
+        classpath plugs.gradleErrorpronePlugin
+        classpath plugs.gradleVersionsPlugin
+        classpath plugs.groovyAndroidGradlePlugin
+    }
+}
+
+allprojects {
+    repositories {
+        maven { url "https://plugins.gradle.org/m2/" }
+    }
+
+    apply plugin: "net.ltgt.errorprone"
+    apply plugin: "com.github.ben-manes.versions"
+    apply from: rootProject.file("gradle/compile.gradle")
+}
+
+//apply from: rootProject.file("gradle/scan.gradle")
+
+task wrapper(type: Wrapper) {
+    gradleVersion = "3.4.1"
+    distributionType = Wrapper.DistributionType.ALL
+}

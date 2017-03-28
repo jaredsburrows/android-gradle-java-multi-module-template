@@ -1,0 +1,70 @@
+apply plugin: "com.android.library"
+apply plugin: "com.getkeepsafe.dexcount"
+apply from: rootProject.file("gradle/quality.gradle")
+
+android {
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
+
+    defaultConfig {
+        versionCode 1
+        versionName "1.0"
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        resConfigs "en" // Keep only english resource files for now
+        vectorDrawables.useSupportLibrary = true
+    }
+
+    compileOptions {
+        sourceCompatibility rootProject.ext.sourceCompatibilityVersion
+        targetCompatibility rootProject.ext.sourceCompatibilityVersion
+    }
+
+    dexOptions {
+        preDexLibraries !rootProject.ext.ci
+    }
+
+    lintOptions {
+        textOutput "stdout"
+        checkAllWarnings true
+        warningsAsErrors true
+        disable "UnusedResources"              // Unused will be removed on release
+        disable "IconExpectedSize"             // Using the material icons provided from Google
+        disable "GoogleAppIndexingApiWarning"  // We might want to index our app later
+        disable "GradleDependency"
+        disable "NewerVersionAvailable"
+    }
+
+    testOptions {
+        animationsDisabled = true
+
+        unitTests {
+            returnDefaultValues = true
+
+            all {
+                jacoco {
+                    includeNoLocationClasses = true
+                }
+            }
+        }
+    }
+
+    packagingOptions {
+        exclude "**/*.txt"
+        exclude "**/*.xml"
+        exclude "**/*.properties"
+    }
+}
+
+configurations.all {
+    resolutionStrategy.force "com.android.support:support-annotations:$rootProject.supportLibraryVersion"
+}
+
+dependencies {
+    compile project(":java-library")
+
+    testCompile deps.junit
+    testCompile deps.mockitoCore
+    testCompile deps.assertjCore
+}

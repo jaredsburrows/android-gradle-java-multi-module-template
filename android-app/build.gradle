@@ -1,0 +1,113 @@
+apply plugin: "com.android.application"
+apply plugin: "android-command"
+apply plugin: "com.getkeepsafe.dexcount"
+apply plugin: "com.vanniktech.android.apk.size"
+apply from: rootProject.file("gradle/quality.gradle")
+apply from: rootProject.file("gradle/publish.gradle")
+
+android {
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
+
+    defaultConfig {
+        applicationId "burrows.apps.example.template"
+        versionCode 1
+        versionName "1.0"
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        resConfigs "en" // Keep only english resource files for now
+        vectorDrawables.useSupportLibrary = true
+    }
+
+    dataBinding {
+        enabled = true
+        enabledForTests = true
+    }
+
+    compileOptions {
+        sourceCompatibility rootProject.ext.sourceCompatibilityVersion
+        targetCompatibility rootProject.ext.sourceCompatibilityVersion
+    }
+
+    dexOptions {
+        preDexLibraries !rootProject.ext.ci
+    }
+
+    lintOptions {
+        textOutput "stdout"
+        checkAllWarnings true
+        warningsAsErrors true
+        disable "UnusedResources"              // Unused will be removed on release
+        disable "IconExpectedSize"             // Using the material icons provided from Google
+        disable "GoogleAppIndexingApiWarning"  // We might want to index our app later
+        disable "GradleDependency"
+        disable "NewerVersionAvailable"
+    }
+
+    testOptions {
+        animationsDisabled = true
+
+        unitTests {
+            returnDefaultValues = true
+
+            all {
+                jacoco {
+                    includeNoLocationClasses = true
+                }
+            }
+        }
+    }
+
+    packagingOptions {
+        exclude "**/*.txt"
+        exclude "**/*.xml"
+        exclude "**/*.properties"
+    }
+
+    signingConfigs {
+        debug {
+            storeFile rootProject.file(".buildscript/debug.keystore")
+            storePassword rootProject.ext.debugKeystorePass
+            keyAlias rootProject.ext.debugKeystoreUser
+            keyPassword rootProject.ext.debugKeystorePass
+        }
+    }
+
+    buildTypes {
+        debug {
+            debuggable true
+            testCoverageEnabled true // generated coverage for android tests
+            applicationIdSuffix ".debug"
+        }
+
+        release {
+            minifyEnabled false
+            proguardFile getDefaultProguardFile("proguard-android-optimize.txt")
+            proguardFile "proguard-rules.txt"
+            signingConfig signingConfigs.debug
+        }
+    }
+}
+
+configurations.all {
+    resolutionStrategy.force "com.android.support:support-annotations:$rootProject.supportLibraryVersion"
+}
+
+dependencies {
+    compile project(":android-library")
+    compile deps.appcompatv7
+
+    androidTestCompile deps.junit
+    androidTestCompile deps.assertjCore
+    androidTestCompile deps.dexmaker
+    androidTestCompile deps.dexmakerMockito
+    androidTestCompile deps.runner
+    androidTestCompile deps.espressoCore
+    androidTestCompile deps.espressoIntents
+    androidTestCompile(deps.espressoContrib) { exclude group: "com.android.support" }
+
+    testCompile deps.junit
+    testCompile deps.mockitoCore
+    testCompile deps.assertjCore
+}
