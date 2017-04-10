@@ -1,6 +1,6 @@
 apply plugin: "com.android.library"
 apply plugin: "com.getkeepsafe.dexcount"
-apply from: rootProject.file("gradle/quality.gradle")
+apply plugin: "jacoco"
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion

@@ -2,7 +2,7 @@ apply plugin: "com.android.application"
 apply plugin: "android-command"
 apply plugin: "com.getkeepsafe.dexcount"
 apply plugin: "com.vanniktech.android.apk.size"
-apply from: rootProject.file("gradle/quality.gradle")
+apply plugin: "jacoco"
 apply from: rootProject.file("gradle/publish.gradle")
 
 android {
@@ -20,10 +20,10 @@ android {
         vectorDrawables.useSupportLibrary = true
     }
 
-    dataBinding {
-        enabled = true
-        enabledForTests = true
-    }
+//    dataBinding {
+//        enabled = true
+//        enabledForTests = true
+//    }
 
     compileOptions {
         sourceCompatibility rootProject.ext.sourceCompatibilityVersion

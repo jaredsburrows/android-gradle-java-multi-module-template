@@ -5,7 +5,7 @@
 [![Coveralls Code Coverage](https://img.shields.io/coveralls/jaredsburrows/android-gradle-java-mutli-module-template/master.svg?label=Code%20Coverage)](https://coveralls.io/github/jaredsburrows/android-gradle-java-mutli-module-template?branch=master)
 [![Twitter Follow](https://img.shields.io/twitter/follow/jaredsburrows.svg?style=social)](https://twitter.com/jaredsburrows)
 
-This demonstrates a mutli module build with an Android app module, Android library module and a Java module.
+This demonstrates a multi module build with an Android app module, Android library module and a Java module.
 
 ## Technologies used:
 #### Build Tools:

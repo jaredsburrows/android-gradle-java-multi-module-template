@@ -11,7 +11,7 @@ ext {
     debugKeystorePass = "android"
 
     // Common versions
-    supportLibraryVersion = "25.3.0"
+    supportLibraryVersion = "25.3.1"
     firebaseVersion = "10.2.0"
     espressoVersion = "2.2.2"
     dexmakerVersion = "1.2"
@@ -19,7 +19,7 @@ ext {
 
 // Plugins
 ext.plugs = [
-    gradle                    : "com.android.tools.build:gradle:2.3.0",
+    gradle                    : "com.android.tools.build:gradle:2.3.1",
     gradleAndroidCommandPlugin: "com.novoda:gradle-android-command-plugin:1.7.1",
     playPublisher             : "com.github.triplet.gradle:play-publisher:1.1.5",
     buildScanPlugin           : "com.gradle:build-scan-plugin:1.4",
@@ -34,7 +34,6 @@ ext.plugs = [
 // Dependencies
 ext.deps = [
     // compile
-    // - Android/Google
     design               : "com.android.support:design:$supportLibraryVersion",
     appcompatv7          : "com.android.support:appcompat-v7:$supportLibraryVersion",
     supportv4            : "com.android.support:support-v4:$supportLibraryVersion",

@@ -5,15 +5,14 @@ tasks.withType(JavaCompile) {
 
     // Show all warnings except boot classpath
     configure(options) {
-        compilerArgs << "-Xlint:all" // Turn on all warnings
-        compilerArgs << "-Xlint:-options" // Turn off "missing" bootclasspath warning
-        compilerArgs << "-Xlint:-path" // Turn off warning - annotation processing
-        compilerArgs << "-Xlint:-processing" // Turn off warning about not claiming annotations
-        compilerArgs << "-Werror" // Turn warnings into errors
-        compilerArgs << "-Xdiags:verbose" // Turn on verbose errors
-        compilerArgs << "-Xep:MissingOverride:OFF" // Databinding causes this issue
-        compilerArgs << "-Xep:ClassNewInstance:OFF"
-        // Databinding causes this issue - http://b.android.com/234648
+        compilerArgs << "-Xlint:all"                        // Turn on all warnings
+        compilerArgs << "-Xlint:-options"                   // Turn off "missing" bootclasspath warning
+        compilerArgs << "-Xlint:-path"                      // Turn off warning - annotation processing
+        compilerArgs << "-Xlint:-processing"                // Turn off warning about not claiming annotations
+        compilerArgs << "-Werror"                           // Turn warnings into errors
+        compilerArgs << "-Xdiags:verbose"                   // Turn on verbose errors
+        compilerArgs << "-Xep:MissingOverride:OFF"          // Databinding causes this issue
+        compilerArgs << "-Xep:ClassNewInstance:OFF"         // Databinding causes this issue - http://b.android.com/234648
         encoding = "utf-8"
         incremental = true
         fork = true

@@ -21,6 +21,11 @@ buildscript {
     }
 }
 
+apply from: rootProject.file("gradle/scan.gradle")
+apply plugin: "com.github.kt3k.coveralls"
+apply plugin: "project-report"
+apply plugin: "build-dashboard"
+
 allprojects {
     repositories {
         maven { url "https://plugins.gradle.org/m2/" }
@@ -31,9 +36,20 @@ allprojects {
     apply from: rootProject.file("gradle/compile.gradle")
 }
 
-//apply from: rootProject.file("gradle/scan.gradle")
-
 task wrapper(type: Wrapper) {
     gradleVersion = "3.4.1"
     distributionType = Wrapper.DistributionType.ALL
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
+
+subprojects {
+    apply from: rootProject.file("gradle/quality.gradle")
+}
+
+// Only allows specifying of a single file
+coveralls {
+    jacocoReportPath "$rootProject/android-app/reports/jacoco/jacocoReport/jacocoReport.xml"
 }
