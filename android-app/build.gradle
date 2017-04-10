@@ -20,10 +20,10 @@ android {
         vectorDrawables.useSupportLibrary = true
     }
 
-//    dataBinding {
-//        enabled = true
-//        enabledForTests = true
-//    }
+    dataBinding {
+        enabled = true
+        enabledForTests = true
+    }
 
     compileOptions {
         sourceCompatibility rootProject.ext.sourceCompatibilityVersion

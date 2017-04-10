@@ -33,9 +33,9 @@ task("jacocoReport", type: JacocoReport) {
         html.enabled = true
     }
     sourceDirectories = files(["src/main/java"])
-    classDirectories = (file("$project.buildDir/classes").exists()
-        ? files("$project.buildDir/classes")
-        : files("$project.buildDir/intermediates/classes/debug"))
+    classDirectories = (file("$project.buildDir/intermediates/classes/debug").exists()
+        ? files("$project.buildDir/intermediates/classes/debug")
+        : files("$project.buildDir/classes"))
     executionData = fileTree(dir: "$project.buildDir", includes: ["jacoco/*.exec"])
 }
 
@@ -57,9 +57,9 @@ task("findBugs", type: FindBugs) {
     include "**/*.java"
     exclude "**/*Test.java"
     classpath = files()
-    classes = (file("$project.buildDir/classes").exists()
-        ? files("$project.buildDir/classes")
-        : files("$project.buildDir/intermediates/classes/debug"))
+    classes = (file("$project.buildDir/intermediates/classes/debug").exists()
+        ? files("$project.buildDir/intermediates/classes/debug")
+        : files("$project.buildDir/classes"))
 }
 
 /**
@@ -80,8 +80,5 @@ task("checkstyle", type: Checkstyle) {
 }
 
 afterEvaluate {
-    tasks.findByName("check").dependsOn("pmd")
-    tasks.findByName("check").dependsOn("jacocoReport")
-    tasks.findByName("check").dependsOn("findBugs")
-    tasks.findByName("check").dependsOn("checkstyle")
+    tasks.findByName("check").dependsOn("pmd", "findBugs", "checkstyle", "jacocoReport")
 }

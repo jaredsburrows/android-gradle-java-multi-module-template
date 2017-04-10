@@ -12,7 +12,7 @@ install:
   - echo y | android update sdk -u -a -t extra-android-m2repository
 
 script:
-  - ./gradlew clean assembleDebug check coveralls -Pci -Dscan --configure-on-demand --parallel --stacktrace
+  - ./gradlew clean assembleDebug testDebug pmd jacocoReport checkstyle coveralls -Pci -Dscan --configure-on-demand --parallel --stacktrace
 
 branches:
   except:

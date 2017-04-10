@@ -23,7 +23,6 @@ buildscript {
 
 apply from: rootProject.file("gradle/scan.gradle")
 apply plugin: "com.github.kt3k.coveralls"
-apply plugin: "project-report"
 apply plugin: "build-dashboard"
 
 allprojects {
