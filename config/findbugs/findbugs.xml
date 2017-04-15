@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FindBugsFilter>
+
+  <!-- Exclude classes -->
+  <Match>
+    <!-- exclude android generated class -->
+    <Class name="~.*\.R\$.*"/>
+  </Match>
+  <Match>
+    <!-- exclude android generated class -->
+    <Class name="~.*\.Manifest\$.*"/>
+  </Match>
+  <Match>
+    <!--exclude auto-generated dagger classes -->
+    <Class name="~.*\.*Dagger.*"/>
+  </Match>
+
+  <!-- Exclude bugs see http://findbugs.sourceforge.net/bugDescriptions.html -->
+
+</FindBugsFilter>
