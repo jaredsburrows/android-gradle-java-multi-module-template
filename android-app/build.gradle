@@ -38,11 +38,7 @@ android {
         textOutput "stdout"
         checkAllWarnings true
         warningsAsErrors true
-        disable "UnusedResources"              // Unused will be removed on release
-        disable "IconExpectedSize"             // Using the material icons provided from Google
-        disable "GoogleAppIndexingApiWarning"  // We might want to index our app later
-        disable "GradleDependency"
-        disable "NewerVersionAvailable"
+        lintConfig file("${project.rootDir}/config/lint/lint.xml")
     }
 
     testOptions {

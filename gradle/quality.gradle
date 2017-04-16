@@ -60,7 +60,9 @@ task("jacocoReport", type: JacocoReport) {
 /**
  * Generates FindBugs reports based off the source code.
  */
-task("findBugs", type: FindBugs) {
+task("findBugs", type: FindBugs,
+    dependsOn: file("$project.buildDir/intermediates/classes").exists() ? "assembleDebug" :
+        "assemble") {
     group "Reporting"
     description "Generate Findbugs reports."
 

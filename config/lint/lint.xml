@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<lint>
+  <!-- Unused will be removed on release -->
+  <issue id="UnusedResources" severity="ignore"/>
+
+  <!-- Using the material icons provided from Google -->
+  <issue id="IconExpectedSize" severity="ignore"/>
+
+  <!-- Not using Google App Indexing -->
+  <issue id="GoogleAppIndexingApiWarning" severity="ignore"/>
+
+  <!-- Do not fail build when new dependency is available -->
+  <issue id="GradleDependency" severity="ignore"/>
+
+  <!-- Do not fail build when new dependency is available -->
+  <issue id="NewerVersionAvailable" severity="ignore"/>
+</lint>
