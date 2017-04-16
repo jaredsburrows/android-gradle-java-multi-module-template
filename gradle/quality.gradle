@@ -68,7 +68,6 @@ task("findBugs", type: FindBugs) {
         xml.enabled = false
         html.enabled = true
     }
-    ignoreFailures = true
     effort = "max"
     reportLevel = "low"
     source "src/main/java"
