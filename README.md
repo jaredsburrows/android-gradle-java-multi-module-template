@@ -9,7 +9,7 @@ This demonstrates running source analysis tools(PMD, Findbugs, Checkstyle, Lint 
 
 ## Building and Running
 
-This project builds with [Gradle](www.gradle.org) and the Android Build [tools](http://tools.android.com/tech-docs/new-build-system).
+This project builds with [Gradle](https://gradle.org/) and the Android Build [tools](https://developer.android.com/studio/index.html).
 
 **Build the APK:**
 
