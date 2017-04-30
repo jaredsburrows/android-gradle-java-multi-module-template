@@ -24,7 +24,7 @@ def exclude = [
     '**/*_Provide*Factory*.*']
 
 /**
- * Generates Lint reports based off the source code.
+ * Generates Pmd reports based off the source code.
  */
 task("pmd", type: Pmd) {
     group "Reporting"
@@ -51,8 +51,8 @@ task("jacocoReport", type: JacocoReport) {
         html.enabled = true
     }
     sourceDirectories = files(["src/main/java"])
-    classDirectories = (file("$project.buildDir/intermediates/classes").exists()
-        ? fileTree(dir: "$project.buildDir/intermediates/classes", excludes: exclude)
+    classDirectories = (file("$project.buildDir/intermediates/classes/debug").exists()
+        ? fileTree(dir: "$project.buildDir/intermediates/classes/debug", excludes: exclude)
         : fileTree(dir: "$project.buildDir/classes", excludes: exclude))
     executionData = fileTree(dir: "$project.buildDir", includes: ["jacoco/*.exec"])
 }
@@ -74,8 +74,8 @@ task("findBugs", type: FindBugs,
     reportLevel = "low"
     source "src/main/java"
     classpath = files()
-    classes = (file("$project.buildDir/intermediates/classes").exists()
-        ? fileTree(dir: "$project.buildDir/intermediates/classes", excludes: exclude)
+    classes = (file("$project.buildDir/intermediates/classes/debug").exists()
+        ? fileTree(dir: "$project.buildDir/intermediates/classes/debug", excludes: exclude)
         : fileTree(dir: "$project.buildDir/classes", excludes: exclude))
     excludeFilter = file("${project.rootDir}/config/findbugs/findbugs.xml")
 }
