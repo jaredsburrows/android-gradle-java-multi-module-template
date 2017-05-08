@@ -26,7 +26,7 @@ def exclude = [
 /**
  * Generates Pmd reports based off the source code.
  */
-task("pmd", type: Pmd) {
+task pmd(type: Pmd) {
     group "Reporting"
     description "Generate Pmd reports."
 
@@ -42,7 +42,7 @@ task("pmd", type: Pmd) {
 /**
  * Generates Jacoco coverage reports based off the unit tests.
  */
-task("jacocoReport", type: JacocoReport) {
+task jacocoReport(type: JacocoReport) {
     group "Reporting"
     description "Generate Jacoco coverage reports."
 
@@ -60,7 +60,7 @@ task("jacocoReport", type: JacocoReport) {
 /**
  * Generates FindBugs reports based off the source code.
  */
-task("findBugs", type: FindBugs,
+task findBugs(type: FindBugs,
     dependsOn: file("$project.buildDir/intermediates/classes").exists() ? "assembleDebug" :
         "assemble") {
     group "Reporting"
@@ -83,7 +83,7 @@ task("findBugs", type: FindBugs,
 /**
  * Generates Checkstyle reports based off the source code.
  */
-task("checkstyle", type: Checkstyle) {
+task checkstyle(type: Checkstyle) {
     group "Reporting"
     description "Generate Checkstyle reports."
 
